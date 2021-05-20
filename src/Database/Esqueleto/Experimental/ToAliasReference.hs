@@ -21,7 +21,7 @@ instance ToAliasReference (SqlExpr (Value a)) where
       | Just alias <- sqlExprMetaAlias m = pure $ ERaw m{sqlExprMetaIsReference = False} $ \_ info ->
           (useIdent info aliasSource, [])
       | Just alias <- sqlExprMetaAlias m = pure $ ERaw m{sqlExprMetaIsReference = True} $ \_ info ->
-          (useIdent info aliasSource <> "." <> useIdent info alias, [])
+          (useIdent info aliasSource, [])
     toAliasReference _ e = pure e
 
 instance ToAliasReference (SqlExpr (Entity a)) where
